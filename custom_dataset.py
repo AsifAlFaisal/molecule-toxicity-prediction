@@ -8,6 +8,8 @@ from torch_geometric.data import Dataset
 from tqdm import tqdm
 import deepchem as dc
 # %% Creating dataset
+# Much of these code in this script are adapted from "https://github.com/deepfindr/gnn-project/blob/main/dataset_featurizer.py"
+
 class ToxDataset(Dataset):
     def __init__(self, root, filename, test=False, transform=None, pre_transform=None):
         """root = where the dataset should be stored. This folder is split into raw_dir and processed_dir."""
@@ -43,7 +45,7 @@ class ToxDataset(Dataset):
             # Featurize molecule
             f = featurizer.featurize(mol['smiles'])
             data = f[0].to_pyg_graph()
-            data.y = self._get_label(mol['label'])
+            data.y = self._get_label(mol['labels'])
             data.smiles = mol['smiles']
             if self.test:
                 torch.save(data, os.path.join(self.processed_dir, f'data_test_{index}.pt'))
@@ -67,6 +69,3 @@ class ToxDataset(Dataset):
             data = torch.load(os.path.join(self.processed_dir, f'data_{idx}.pt'))
 
         return data
-# %%
-#train_set = ToxDataset(root="data/", filename='toxicity-train-oversampled.csv')
-#test_set = ToxDataset(root="data/", filename='toxicity-test.csv', test=True)

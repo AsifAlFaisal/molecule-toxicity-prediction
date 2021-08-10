@@ -21,4 +21,3 @@ test_data = process_kaggle(test_path).drop(discard_test_muid).reset_index(drop=T
 # Saving the dataframes into data/raw directory
 train_data.to_csv('data/raw/toxicity-train.csv', index=False)
 test_data.to_csv('data/raw/toxicity-test.csv', index=False)
-# %%

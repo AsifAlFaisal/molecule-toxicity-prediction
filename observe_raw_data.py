@@ -13,4 +13,5 @@ from rdkit.Chem import Draw
 
 sample_smiles = data['smiles']
 sample_mols = [Chem.MolFromSmiles(mol) for mol in sample_smiles]
-sample_mols[232]
+Draw.MolToImage(sample_mols[1000])
+
