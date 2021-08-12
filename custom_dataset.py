@@ -8,26 +8,18 @@ from torch_geometric.data import Dataset
 from tqdm import tqdm
 import deepchem as dc
 # %% Creating dataset
-# Much of these code in this script are adapted from "https://github.com/deepfindr/gnn-project/blob/main/dataset_featurizer.py"
-
 class ToxDataset(Dataset):
-    def __init__(self, root, filename, test=False, transform=None, pre_transform=None):
-        """root = where the dataset should be stored. This folder is split into raw_dir and processed_dir."""
-        
+    def __init__(self, root, filename, test=False, transform=None, pre_transform=None):        
         self.test = test
         self.filename = filename
         super(ToxDataset, self).__init__(root, transform, pre_transform)
 
     @property
     def raw_file_names(self):
-        """If this file exists in raw_dir, the download is not triggered.
-        (The download func. is not implemented here)
-        """
         return self.filename
 
     @property
     def processed_file_names(self):
-        """If these are found in raw_dir, processing is skipped"""
         self.data = pd.read_csv(self.raw_paths[0]).reset_index()
 
         if self.test:
@@ -60,12 +52,11 @@ class ToxDataset(Dataset):
         return self.data.shape[0]
 
     def get(self, idx):
-        """ - Equivalent to __getitem__ in pytorch.
-            - Is not needed for PyG's InMemoryDataset
-        """
         if self.test:
             data = torch.load(os.path.join(self.processed_dir, f'data_test_{idx}.pt'))
         else:
             data = torch.load(os.path.join(self.processed_dir, f'data_{idx}.pt'))
 
         return data
+
+# %%

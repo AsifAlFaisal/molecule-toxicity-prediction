@@ -4,7 +4,7 @@ from torch_geometric.utils import to_networkx
 import networkx as nx
 from torch_geometric.data import DataLoader
 # %%
-train_set = ToxDataset(root="data/", filename='toxicity-train-resampled.csv')
+#train_set = ToxDataset(root="data/", filename='toxicity-train-resampled.csv')
 test_set = ToxDataset(root="data/", filename='toxicity-test.csv', test=True)
 
 # %%
