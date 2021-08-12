@@ -4,14 +4,14 @@ from torch_geometric.utils import to_networkx
 import networkx as nx
 from torch_geometric.data import DataLoader
 # %%
-#train_set = ToxDataset(root="data/", filename='toxicity-train-resampled.csv')
+train_set = ToxDataset(root="data/", filename='toxicity-train-resampled.csv')
 test_set = ToxDataset(root="data/", filename='toxicity-test.csv', test=True)
 
 # %%
 print('======================')
-print(f'Number of graphs: {len(train_set)}')
-print(f'Number of features: {train_set.num_features}')
-data = train_set[232]  # Get a graph object.
+print(f'Number of graphs: {len(test_set)}')
+print(f'Number of features: {test_set.num_features}')
+data = test_set[232]  # Get a graph object.
 print(data)
 print('==============================================================')
 
