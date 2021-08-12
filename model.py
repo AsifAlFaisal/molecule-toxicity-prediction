@@ -68,6 +68,3 @@ for epoch in range(500):
     all_loss.append(train_loss)
 print("Done!")
 
-# %%
-px.line(all_loss)
-# %%
